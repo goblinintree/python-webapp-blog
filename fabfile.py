@@ -17,7 +17,7 @@ _TAR_FILE = 'dist-awesome.tar.gz'
 
 _REMOTE_TMP_TAR = '/tmp/%s' % _TAR_FILE
 
-_REMOTE_BASE_DIR = '/srv/awesome'
+_REMOTE_BASE_DIR = 'E:/WORK/WebRoot/awesome'
 
 
 def _current_path():
@@ -44,7 +44,7 @@ def build():
     includes = ['static', 'templates', 'transwarp', 'favicon.ico', '*.py']
     excludes = ['test', '.*', '*.pyc', '*.pyo']
     local('rm -f dist/%s' % _TAR_FILE)
-    with lcd(os.path.join(_current_path(), 'www')):
+    with cd(os.path.join(_current_path(), 'www')):
         cmd = ['tar', '--dereference', '-czvf', '../dist/%s' % _TAR_FILE]
         cmd.extend(['--exclude=\'%s\'' % ex for ex in excludes])
         cmd.extend(includes)
@@ -67,7 +67,7 @@ def deploy():
     with settings(warn_only=True):
         sudo('supervisorctl stop awesome')
         sudo('supervisorctl start awesome')
-        sudo('/etc/init.d/nginx reload')
+        sudo('D:/apply/devEnv/nginx-1.13.6/nginx reload')
 
 RE_FILES = re.compile('\r?\n')
 
