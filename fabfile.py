@@ -8,7 +8,7 @@ from fabric.api import *
 
 env.user = 'michael'
 env.sudo_user = 'root'
-env.hosts = ['45.32.35.254']
+env.hosts = ['192.168.19.71']
 
 db_user = 'user'
 db_password = 'www-data'
