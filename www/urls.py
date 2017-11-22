@@ -23,6 +23,7 @@ from config import configs
 #     return dict(users=users)
 
 _COOKIE_NAME = 'awesession'
+# _COOKIE_KEY = configs.session.secret
 _COOKIE_KEY = configs.session.secret
 
 
@@ -163,7 +164,8 @@ def register_uauser():
     if user:
         raise APIError('register:failed', 'email', 'Email is already in use.')
     user = User(name=name, email=email, password=password,
-                image='http://www.gravatar.com/avatar/%s?d=mm&s=120' % hashlib.md5(email).hexdigest())
+                image='/static/img/user-default.png')
+    
     user.insert()
 
     cookie = make_signed_cookie(user.id, user.password, None)
