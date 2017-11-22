@@ -4,11 +4,12 @@ import re
 from datetime import datetime
 
 from fabric.api import *
+from fabric.context_managers import *
 
 
 env.user = 'michael'
 env.sudo_user = 'root'
-env.hosts = ['192.168.19.71']
+env.hosts = ['127.0.0.1']
 
 db_user = 'user'
 db_password = 'www-data'
@@ -44,7 +45,7 @@ def build():
     includes = ['static', 'templates', 'transwarp', 'favicon.ico', '*.py']
     excludes = ['test', '.*', '*.pyc', '*.pyo']
     local('rm -f dist/%s' % _TAR_FILE)
-    with cd(os.path.join(_current_path(), 'www')):
+    with lcd(os.path.join(_current_path(), 'www')):
         cmd = ['tar', '--dereference', '-czvf', '../dist/%s' % _TAR_FILE]
         cmd.extend(['--exclude=\'%s\'' % ex for ex in excludes])
         cmd.extend(includes)
